@@ -6,41 +6,60 @@ const fadeUp = keyframes`
 	to   { opacity: 1; transform: translateY(0); }
 `;
 
-export const Card = styled.button`
+export const Card = styled.div<{
+	$isDragging?: boolean;
+	$variant: StatusVariant;
+}>`
+	position: relative;
 	width: 100%;
 	text-align: left;
 	background: ${({ theme }) => theme.color.surface};
 	border: 1px solid ${({ theme }) => theme.color.border};
-	border-radius: ${({ theme }) => theme.radius.lg};
-	padding: 14px;
-	cursor: pointer;
-	animation: ${fadeUp} 0.25s ease both;
+	border-left: 3px solid
+		${({ theme, $variant }) => theme.color[$variant].bar};
+	border-radius: 4px;
+	padding: 10px 12px;
+	cursor: grab;
+	user-select: none;
+	touch-action: none;
+	animation: ${fadeUp} 0.2s ease both;
 	transition:
 		border-color ${({ theme }) => theme.transition.fast},
-		transform ${({ theme }) => theme.transition.fast};
+		box-shadow ${({ theme }) => theme.transition.fast},
+		opacity ${({ theme }) => theme.transition.fast};
 
 	&:hover {
 		border-color: ${({ theme }) => theme.color.borderStrong};
+		border-left-color: ${({ theme, $variant }) =>
+			theme.color[$variant].bar};
+		box-shadow: ${({ theme }) => theme.shadow.sm};
 	}
 
 	&:active {
-		transform: scale(0.995);
+		cursor: grabbing;
 	}
+
+	${({ $isDragging, theme }) =>
+		$isDragging &&
+		`
+		opacity: 0.35;
+		box-shadow: ${theme.shadow.md};
+	`}
 `;
 
 export const TopRow = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 6px;
-	margin-bottom: 8px;
+	margin-bottom: 6px;
 `;
 
 export const Tag = styled.span`
-	font-size: 11px;
-	font-weight: 500;
+	font-size: 10px;
+	font-weight: 600;
 	color: ${({ theme }) => theme.color.textSubtle};
 	text-transform: uppercase;
-	letter-spacing: 0.04em;
+	letter-spacing: 0.06em;
 `;
 
 export const Dot = styled.span`
@@ -51,52 +70,54 @@ export const Dot = styled.span`
 `;
 
 export const PriorityText = styled.span<{ $variant: PriorityVariant }>`
-	font-size: 11px;
-	font-weight: 500;
+	font-size: 10px;
+	font-weight: 600;
 	color: ${({ theme, $variant }) => theme.color[$variant].text};
 	text-transform: uppercase;
-	letter-spacing: 0.04em;
+	letter-spacing: 0.06em;
 `;
 
 export const Title = styled.div`
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: 600;
 	color: ${({ theme }) => theme.color.text};
-	line-height: 1.4;
+	line-height: 1.35;
 	letter-spacing: -0.01em;
 	margin-bottom: 2px;
 `;
 
 export const Subtitle = styled.div`
-	font-size: 12px;
+	font-size: 11px;
 	color: ${({ theme }) => theme.color.textMuted};
-	margin-bottom: 12px;
+	margin-bottom: 8px;
 `;
 
 export const MetaRow = styled.div`
 	display: flex;
 	align-items: center;
-	gap: 8px;
-	font-size: 12px;
+	gap: 6px;
+	font-size: 11px;
 	color: ${({ theme }) => theme.color.textMuted};
-	margin-bottom: 12px;
+	margin-bottom: 8px;
 `;
 
 export const StatusPill = styled.span<{ $variant: StatusVariant }>`
 	display: inline-flex;
 	align-items: center;
-	gap: 5px;
-	padding: 3px 9px;
-	border-radius: 9999px;
-	font-size: 11px;
+	gap: 4px;
+	padding: 1px 6px;
+	border-radius: 3px;
+	font-size: 10px;
 	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
 	background: ${({ theme, $variant }) => theme.color[$variant].bg};
 	color: ${({ theme, $variant }) => theme.color[$variant].text};
 
 	&::before {
 		content: '';
-		width: 5px;
-		height: 5px;
+		width: 4px;
+		height: 4px;
 		border-radius: 9999px;
 		background: ${({ theme, $variant }) => theme.color[$variant].bar};
 	}
@@ -106,7 +127,7 @@ export const Footer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 12px;
+	gap: 10px;
 `;
 
 export const ProgressWrap = styled.div`
@@ -116,16 +137,16 @@ export const ProgressWrap = styled.div`
 export const ProgressLabel = styled.div`
 	display: flex;
 	justify-content: space-between;
-	font-size: 11px;
+	font-size: 10px;
 	color: ${({ theme }) => theme.color.textMuted};
-	margin-bottom: 4px;
+	margin-bottom: 3px;
 	font-variant-numeric: tabular-nums;
 `;
 
 export const ProgressTrack = styled.div`
-	height: 4px;
+	height: 3px;
 	background: ${({ theme }) => theme.color.surfaceMuted};
-	border-radius: ${({ theme }) => theme.radius.full};
+	border-radius: 2px;
 	overflow: hidden;
 `;
 
@@ -136,12 +157,12 @@ export const ProgressFill = styled.div<{
 	height: 100%;
 	width: ${({ $progress }) => `${$progress}%`};
 	background: ${({ theme, $variant }) => theme.color[$variant].bar};
-	border-radius: ${({ theme }) => theme.radius.full};
+	border-radius: 2px;
 	transition: width ${({ theme }) => theme.transition.base};
 `;
 
 export const Avatar = styled.img`
-	width: 24px;
-	height: 24px;
-	border-radius: ${({ theme }) => theme.radius.full};
+	width: 22px;
+	height: 22px;
+	border-radius: 9999px;
 `;
