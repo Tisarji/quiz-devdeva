@@ -1,20 +1,21 @@
 import { BellOutlined, MenuOutlined, SearchOutlined } from '@ant-design/icons';
-import * as S from '../styles/components/Topbar.styles';
+import * as S from '../styles/Topbar.styles';
 
 interface Props {
+	title: string;
 	value: string;
 	onChange: (v: string) => void;
 	onOpenSidebar: () => void;
 }
 
-export default function Topbar({ value, onChange, onOpenSidebar }: Props) {
+export default function Topbar({ title, value, onChange, onOpenSidebar }: Props) {
 	return (
 		<S.Header>
 			<S.Left>
 				<S.HamburgerButton onClick={onOpenSidebar} aria-label="Open menu">
 					<MenuOutlined />
 				</S.HamburgerButton>
-				<S.Title>Dashboard</S.Title>
+				<S.Title>{title}</S.Title>
 			</S.Left>
 			<S.Right>
 				<S.SearchWrap>
