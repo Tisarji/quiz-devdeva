@@ -89,7 +89,7 @@ export default function TaskModal({ task, mode, onClose, onSave }: Props) {
 									set('priority', e.target.value as TaskPriority)
 								}
 							>
-								<option value="Low">Low</option>
+								<option value="Low Priority">Low Priority</option>
 								<option value="Medium Priority">Medium Priority</option>
 								<option value="High Priority">High Priority</option>
 							</S.Select>

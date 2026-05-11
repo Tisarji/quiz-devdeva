@@ -1,5 +1,5 @@
 export type TaskStatus = 'To Do' | 'In Progress' | 'Done';
-export type TaskPriority = 'Low' | 'Medium Priority' | 'High Priority';
+export type TaskPriority = 'Low Priority' | 'Medium Priority' | 'High Priority';
 
 export type StatusVariant = 'todo' | 'inProgress' | 'done';
 export type PriorityVariant = 'low' | 'medium' | 'high';

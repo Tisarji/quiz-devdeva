@@ -30,7 +30,7 @@ export const theme = {
 			text: '#1f7a3a',
 			bar: '#34c759',
 		},
-		low: { bg: 'rgba(134, 134, 139, 0.12)', text: '#3d3d40' },
+		low: { bg: 'rgba(52, 199, 89, 0.14)', text: '#1f7a3a' },
 		medium: { bg: 'rgba(245, 158, 11, 0.14)', text: '#a35d00' },
 		high: { bg: 'rgba(255, 59, 48, 0.12)', text: '#b3261e' },
 	},
