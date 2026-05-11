@@ -1,4 +1,13 @@
 import { PlusOutlined } from '@ant-design/icons';
+import {
+	DndContext,
+	DragEndEvent,
+	DragOverlay,
+	DragStartEvent,
+	PointerSensor,
+	useSensor,
+	useSensors,
+} from '@dnd-kit/core';
 import { useEffect, useMemo, useState } from 'react';
 import { useDebounce } from '../../shared/hooks/useDebounce';
 import { Task, TaskPriority, TaskProps, TaskStatus } from '../models/Task';
@@ -8,9 +17,11 @@ import Board from './Board';
 import EmptyState from './EmptyState';
 import Pagination from './Pagination';
 import SearchBar from './SearchBar';
+import TaskCard from './TaskCard';
 import TaskModal from './TaskModal';
 
 const PAGE_SIZE = 6;
+const COLUMN_STATUSES: TaskStatus[] = ['To Do', 'In Progress', 'Done'];
 
 export default function Dashboard() {
 	const [search, setSearch] = useState('');
@@ -23,8 +34,15 @@ export default function Dashboard() {
 	const [selected, setSelected] = useState<Task | null>(null);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [modalMode, setModalMode] = useState<'view' | 'create'>('view');
+	const [draggingId, setDraggingId] = useState<string | null>(null);
 
 	const debouncedSearch = useDebounce(search, 250);
+
+	const sensors = useSensors(
+		useSensor(PointerSensor, {
+			activationConstraint: { distance: 6 },
+		}),
+	);
 
 	useEffect(() => {
 		let cancelled = false;
@@ -61,6 +79,12 @@ export default function Dashboard() {
 		() => pageItems.map((p) => new Task(p)),
 		[pageItems],
 	);
+
+	const draggingTask = useMemo(() => {
+		if (!draggingId) return null;
+		const found = allItems.find((t) => t.id === draggingId);
+		return found ? new Task(found) : null;
+	}, [allItems, draggingId]);
 
 	const openTask = (t: Task) => {
 		setSelected(t);
@@ -99,6 +123,50 @@ export default function Dashboard() {
 		setStatus('All');
 	};
 
+	const handleDragStart = (event: DragStartEvent) => {
+		setDraggingId(String(event.active.id));
+	};
+
+	const handleDragEnd = (event: DragEndEvent) => {
+		setDraggingId(null);
+		const { active, over } = event;
+		if (!over) return;
+
+		const taskId = String(active.id);
+		const target = String(over.id) as TaskStatus;
+		if (!COLUMN_STATUSES.includes(target)) return;
+
+		const current = allItems.find((t) => t.id === taskId);
+		if (!current || current.status === target) return;
+
+		const previousStatus = current.status;
+		const nextProgress = target === 'Done' ? 100 : current.progress;
+
+		setAllItems((prev) =>
+			prev.map((t) =>
+				t.id === taskId
+					? { ...t, status: target, progress: nextProgress }
+					: t,
+			),
+		);
+
+		taskService
+			.update(taskId, { status: target, progress: nextProgress })
+			.catch(() => {
+				setAllItems((prev) =>
+					prev.map((t) =>
+						t.id === taskId
+							? {
+									...t,
+									status: previousStatus,
+									progress: current.progress,
+								}
+							: t,
+					),
+				);
+			});
+	};
+
 	const isEmpty = !loading && total === 0;
 	const hasFilters =
 		Boolean(debouncedSearch) || priority !== 'All' || status !== 'All';
@@ -106,7 +174,12 @@ export default function Dashboard() {
 	return (
 		<>
 			<S.PageHeader>
-				<S.PageTitle>Dashboard</S.PageTitle>
+				<S.PageTitleRow>
+					<S.PageTitle>Dashboard</S.PageTitle>
+					<S.PageCount>
+						{total} task{total === 1 ? '' : 's'}
+					</S.PageCount>
+				</S.PageTitleRow>
 				<S.NewButton onClick={openCreate}>
 					<PlusOutlined />
 					New Task
@@ -117,7 +190,6 @@ export default function Dashboard() {
 				search={search}
 				priority={priority}
 				status={status}
-				total={total}
 				onSearch={setSearch}
 				onPriority={setPriority}
 				onStatus={setStatus}
@@ -135,7 +207,24 @@ export default function Dashboard() {
 					onReset={hasFilters ? handleClear : undefined}
 				/>
 			) : (
-				<Board tasks={tasks} loading={loading} onSelect={openTask} />
+				<DndContext
+					sensors={sensors}
+					onDragStart={handleDragStart}
+					onDragEnd={handleDragEnd}
+					onDragCancel={() => setDraggingId(null)}
+				>
+					<Board
+						tasks={tasks}
+						loading={loading}
+						draggingId={draggingId}
+						onSelect={openTask}
+					/>
+					<DragOverlay dropAnimation={null}>
+						{draggingTask && (
+							<TaskCard task={draggingTask} onClick={() => {}} />
+						)}
+					</DragOverlay>
+				</DndContext>
 			)}
 
 			{totalPages > 1 && (

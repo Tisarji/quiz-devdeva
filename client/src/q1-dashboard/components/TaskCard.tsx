@@ -1,17 +1,40 @@
+import { useDraggable } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
 import { Task } from '../models/Task';
 import * as S from '../styles/TaskCard.styles';
 
 interface Props {
 	task: Task;
+	isDragging?: boolean;
 	onClick: () => void;
 }
 
-export default function TaskCard({ task, onClick }: Props) {
+export default function TaskCard({ task, isDragging, onClick }: Props) {
 	const statusVariant = task.statusVariant();
 	const priorityVariant = task.priorityVariant();
 
+	const {
+		attributes,
+		listeners,
+		setNodeRef,
+		transform,
+		isDragging: isDraggingNow,
+	} = useDraggable({ id: task.id });
+
+	const style = {
+		transform: CSS.Translate.toString(transform),
+	};
+
 	return (
-		<S.Card onClick={onClick}>
+		<S.Card
+			ref={setNodeRef}
+			style={style}
+			$variant={statusVariant}
+			$isDragging={isDragging || isDraggingNow}
+			onClick={onClick}
+			{...listeners}
+			{...attributes}
+		>
 			<S.TopRow>
 				<S.Tag>{task.tag}</S.Tag>
 				<S.Dot />
