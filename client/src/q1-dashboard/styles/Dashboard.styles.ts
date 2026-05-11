@@ -5,28 +5,28 @@ export const PageHeader = styled.div`
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
-	gap: 12px;
-	margin-bottom: 24px;
+	gap: 8px;
+	margin-bottom: 16px;
 `;
 
 export const PageTitle = styled.h1`
 	margin: 0;
-	font-size: 26px;
-	font-weight: 700;
+	font-size: 18px;
+	font-weight: 600;
 	color: ${({ theme }) => theme.color.text};
-	letter-spacing: -0.025em;
+	letter-spacing: -0.01em;
 `;
 
 export const NewButton = styled.button`
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
-	padding: 8px 16px;
-	border-radius: ${({ theme }) => theme.radius.full};
+	padding: 6px 12px;
+	border-radius: 4px;
 	background: ${({ theme }) => theme.color.text};
 	color: white;
-	font-size: 13px;
-	font-weight: 500;
+	font-size: 12px;
+	font-weight: 600;
 	transition:
 		opacity ${({ theme }) => theme.transition.fast},
 		transform ${({ theme }) => theme.transition.fast};

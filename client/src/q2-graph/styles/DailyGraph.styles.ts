@@ -5,35 +5,35 @@ export const Header = styled.div`
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
-	gap: 12px;
-	margin-bottom: 24px;
+	gap: 8px;
+	margin-bottom: 16px;
 `;
 
 export const Title = styled.h1`
 	margin: 0;
-	font-size: 26px;
-	font-weight: 700;
+	font-size: 18px;
+	font-weight: 600;
 	color: ${({ theme }) => theme.color.text};
-	letter-spacing: -0.025em;
+	letter-spacing: -0.01em;
 `;
 
 export const Actions = styled.div`
 	display: inline-flex;
 	align-items: center;
-	gap: 8px;
+	gap: 6px;
 `;
 
 export const RefreshButton = styled.button`
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
-	padding: 8px 14px;
-	border-radius: ${({ theme }) => theme.radius.full};
+	padding: 6px 12px;
+	border-radius: 4px;
 	background: ${({ theme }) => theme.color.surface};
 	border: 1px solid ${({ theme }) => theme.color.border};
 	color: ${({ theme }) => theme.color.text};
-	font-size: 13px;
-	font-weight: 500;
+	font-size: 12px;
+	font-weight: 600;
 	transition:
 		background ${({ theme }) => theme.transition.fast},
 		transform ${({ theme }) => theme.transition.fast};
@@ -56,12 +56,12 @@ export const ExportButton = styled.button`
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
-	padding: 8px 16px;
-	border-radius: ${({ theme }) => theme.radius.full};
+	padding: 6px 12px;
+	border-radius: 4px;
 	background: ${({ theme }) => theme.color.text};
 	color: white;
-	font-size: 13px;
-	font-weight: 500;
+	font-size: 12px;
+	font-weight: 600;
 	transition:
 		opacity ${({ theme }) => theme.transition.fast},
 		transform ${({ theme }) => theme.transition.fast};
