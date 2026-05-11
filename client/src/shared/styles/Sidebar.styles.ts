@@ -40,27 +40,28 @@ export const Aside = styled.aside<{ $collapsed: boolean; $mobileOpen: boolean }>
 `;
 
 export const Header = styled.div`
-	height: 64px;
+	height: 48px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0 16px;
+	padding: 0 12px;
+	border-bottom: 1px solid ${({ theme }) => theme.color.border};
 `;
 
 export const Brand = styled.div`
 	display: flex;
 	align-items: center;
-	gap: 10px;
+	gap: 8px;
 `;
 
 export const BrandLogo = styled.div`
-	width: 28px;
-	height: 28px;
-	border-radius: ${({ theme }) => theme.radius.md};
+	width: 24px;
+	height: 24px;
+	border-radius: 4px;
 	background: ${({ theme }) => theme.color.text};
 	color: white;
-	font-weight: 600;
-	font-size: 13px;
+	font-weight: 700;
+	font-size: 12px;
 	display: grid;
 	place-items: center;
 	letter-spacing: 0;
@@ -68,16 +69,16 @@ export const BrandLogo = styled.div`
 
 export const BrandName = styled.span`
 	font-weight: 600;
-	font-size: 15px;
+	font-size: 13px;
 	letter-spacing: -0.01em;
 `;
 
 export const ToggleButton = styled.button`
-	width: 32px;
-	height: 32px;
+	width: 28px;
+	height: 28px;
 	display: grid;
 	place-items: center;
-	border-radius: ${({ theme }) => theme.radius.sm};
+	border-radius: 4px;
 	color: ${({ theme }) => theme.color.textMuted};
 	transition: background ${({ theme }) => theme.transition.fast};
 
