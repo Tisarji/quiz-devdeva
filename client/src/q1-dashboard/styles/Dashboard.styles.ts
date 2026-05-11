@@ -11,7 +11,7 @@ export const PageHeader = styled.div`
 
 export const PageTitleRow = styled.div`
 	display: inline-flex;
-	align-items: baseline;
+	align-items: center;
 	gap: 10px;
 `;
 

@@ -58,9 +58,10 @@ export default function DailyGraph() {
 	);
 
 	const handleExport = async () => {
-		if (!chartRef.current) return;
+		if (!chartRef.current || loading || data.length === 0) return;
 		setExporting(true);
 		try {
+			await new Promise((resolve) => requestAnimationFrame(resolve));
 			const canvas = await html2canvas(chartRef.current, {
 				backgroundColor: '#ffffff',
 				scale: 2,
@@ -91,7 +92,7 @@ export default function DailyGraph() {
 					</S.RefreshButton>
 					<S.ExportButton
 						onClick={handleExport}
-						disabled={loading || exporting}
+						disabled={loading || exporting || data.length === 0}
 					>
 						<FilePdfOutlined />
 						{exporting ? 'Exporting...' : 'Export PDF'}
@@ -116,7 +117,7 @@ export default function DailyGraph() {
 				</S.ScaleBar>
 
 				<S.ChartWrap ref={chartRef}>
-					{loading ? (
+					{loading && data.length === 0 ? (
 						<S.LoadingText>Loading chart...</S.LoadingText>
 					) : (
 						<ResponsiveContainer width="100%" height="100%">
