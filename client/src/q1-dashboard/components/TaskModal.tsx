@@ -114,7 +114,7 @@ export default function TaskModal({ task, mode, onClose, onSave }: Props) {
 								type="range"
 								min={0}
 								max={100}
-								step={1}
+								step={5}
 								value={form.progress}
 								$progress={form.progress}
 								onChange={(e) =>
