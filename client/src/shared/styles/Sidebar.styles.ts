@@ -97,12 +97,13 @@ export const Nav = styled.nav`
 `;
 
 export const NavItem = styled.button<{ $active: boolean }>`
+	position: relative;
 	display: flex;
 	align-items: center;
 	gap: 12px;
 	width: 100%;
 	padding: 8px 12px;
-	border-radius: ${({ theme }) => theme.radius.md};
+	border-radius: 4px;
 	color: ${({ theme }) => theme.color.textMuted};
 	font-size: 14px;
 	text-align: left;
@@ -118,14 +119,21 @@ export const NavItem = styled.button<{ $active: boolean }>`
 	${({ $active, theme }) =>
 		$active &&
 		css`
-			color: ${theme.color.text};
+			color: white;
 			font-weight: 600;
-			background: ${theme.color.surface};
+			background: ${theme.color.text};
+
+			&:hover {
+				background: ${theme.color.text};
+				color: white;
+				opacity: 0.92;
+			}
 		`}
 `;
 
-export const NavIcon = styled.span`
+export const NavIcon = styled.span<{ $active?: boolean }>`
 	font-size: 15px;
 	display: inline-flex;
-	color: ${({ theme }) => theme.color.textMuted};
+	color: ${({ theme, $active }) =>
+		$active ? 'white' : theme.color.textMuted};
 `;

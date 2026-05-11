@@ -77,7 +77,9 @@ export default function Sidebar({
 							$active={m.view === view}
 							onClick={() => handleClick(m)}
 						>
-							<S.NavIcon>{m.icon}</S.NavIcon>
+							<S.NavIcon $active={m.view === view}>
+								{m.icon}
+							</S.NavIcon>
 							{!collapsed && <span>{m.label}</span>}
 						</S.NavItem>
 					))}
