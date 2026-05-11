@@ -1,6 +1,6 @@
 import type { StatusVariant, TaskStatus } from '../models/Task';
 import { Task } from '../models/Task';
-import * as S from '../styles/components/Board.styles';
+import * as S from '../styles/Board.styles';
 import { SkeletonColumn } from './Skeleton';
 import TaskCard from './TaskCard';
 

@@ -1,5 +1,5 @@
 import { InboxOutlined } from '@ant-design/icons';
-import * as S from '../styles/components/EmptyState.styles';
+import * as S from '../styles/EmptyState.styles';
 
 interface Props {
 	title?: string;

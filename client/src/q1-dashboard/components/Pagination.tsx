@@ -1,5 +1,5 @@
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import * as S from '../styles/components/Pagination.styles';
+import * as S from '../styles/Pagination.styles';
 
 interface Props {
 	page: number;

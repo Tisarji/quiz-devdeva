@@ -1,6 +1,6 @@
 import { CloseOutlined, SearchOutlined } from '@ant-design/icons';
 import { TaskPriority, TaskStatus } from '../models/Task';
-import * as S from '../styles/components/SearchBar.styles';
+import * as S from '../styles/SearchBar.styles';
 
 interface Props {
 	search: string;

@@ -1,4 +1,4 @@
-import * as S from '../styles/components/Skeleton.styles';
+import * as S from '../styles/Skeleton.styles';
 
 export function SkeletonCard() {
 	return (

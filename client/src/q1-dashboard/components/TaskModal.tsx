@@ -1,7 +1,7 @@
 import { CloseOutlined } from '@ant-design/icons';
 import { useEffect, useState, type ReactNode } from 'react';
 import { Task, TaskPriority, TaskProps, TaskStatus, todayIso } from '../models/Task';
-import * as S from '../styles/components/TaskModal.styles';
+import * as S from '../styles/TaskModal.styles';
 
 interface Props {
 	task: Task | null;

@@ -1,5 +1,5 @@
 import { Task } from '../models/Task';
-import * as S from '../styles/components/TaskCard.styles';
+import * as S from '../styles/TaskCard.styles';
 
 interface Props {
 	task: Task;

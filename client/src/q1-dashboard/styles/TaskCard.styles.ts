@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import type { PriorityVariant, StatusVariant } from '../../models/Task';
+import type { PriorityVariant, StatusVariant } from '../models/Task';
 
 const fadeUp = keyframes`
 	from { opacity: 0; transform: translateY(4px); }

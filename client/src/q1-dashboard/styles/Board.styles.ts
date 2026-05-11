@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import type { StatusVariant } from '../../models/Task';
+import type { StatusVariant } from '../models/Task';
 
 export const Grid = styled.div`
 	display: grid;
