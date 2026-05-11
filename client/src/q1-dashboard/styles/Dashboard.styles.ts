@@ -9,12 +9,29 @@ export const PageHeader = styled.div`
 	margin-bottom: 16px;
 `;
 
+export const PageTitleRow = styled.div`
+	display: inline-flex;
+	align-items: baseline;
+	gap: 10px;
+`;
+
 export const PageTitle = styled.h1`
 	margin: 0;
 	font-size: 18px;
 	font-weight: 600;
 	color: ${({ theme }) => theme.color.text};
 	letter-spacing: -0.01em;
+`;
+
+export const PageCount = styled.span`
+	font-size: 12px;
+	font-weight: 500;
+	color: ${({ theme }) => theme.color.textMuted};
+	background: ${({ theme }) => theme.color.surfaceMuted};
+	border: 1px solid ${({ theme }) => theme.color.border};
+	padding: 2px 8px;
+	border-radius: 4px;
+	font-variant-numeric: tabular-nums;
 `;
 
 export const NewButton = styled.button`

@@ -105,8 +105,3 @@ export const ClearAllButton = styled.button`
 	}
 `;
 
-export const ResultText = styled.div`
-	margin-top: 10px;
-	font-size: 12px;
-	color: ${({ theme }) => theme.color.textSubtle};
-`;

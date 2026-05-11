@@ -6,7 +6,6 @@ interface Props {
 	search: string;
 	priority: TaskPriority | 'All';
 	status: TaskStatus | 'All';
-	total: number;
 	onSearch: (v: string) => void;
 	onPriority: (v: TaskPriority | 'All') => void;
 	onStatus: (v: TaskStatus | 'All') => void;
@@ -17,7 +16,6 @@ export default function SearchBar({
 	search,
 	priority,
 	status,
-	total,
 	onSearch,
 	onPriority,
 	onStatus,
@@ -73,12 +71,6 @@ export default function SearchBar({
 					<S.ClearAllButton onClick={onClear}>Clear</S.ClearAllButton>
 				)}
 			</S.Row>
-
-			<S.ResultText>
-				{total === 0
-					? 'No matching tasks'
-					: `${total} task${total === 1 ? '' : 's'}`}
-			</S.ResultText>
 		</S.Wrap>
 	);
 }
